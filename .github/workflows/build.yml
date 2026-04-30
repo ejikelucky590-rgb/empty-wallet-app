@@ -1,6 +1,9 @@
 name: Empty Wallet Build
-on: [push]
-
+on:
+  push:
+    branches: [ main ]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,21 +21,29 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Repair Android Project
-        run: flutter create --platforms android,web .
+      - name: Repair and Clean
+        run: |
+          flutter clean
+          flutter create --platforms android,web .
+          flutter pub get
 
       - name: Build Web
-        run: flutter build web --release
+        run: |
+          # The base-href is critical for GitHub Pages
+          flutter build web --release --base-href "/${{ github.event.repository.name }}/" --no-tree-shake-icons
 
       - name: Build APK
         run: |
-          flutter pub get
           flutter build apk --split-per-abi
           
-      - name: Upload All Artifacts
+      - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
-          name: project-builds
-          path: |
-            build/app/outputs/flutter-apk/*.apk
-            build/web/**
+          name: all-release-apks
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
