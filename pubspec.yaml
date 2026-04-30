@@ -1,0 +1,27 @@
+name: dove_music
+description: A Zero Dollar Project hybrid of TikTok and Spotify for Africa.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Video Player for the TikTok feed
+  video_player: ^2.8.1
+  # Audio Player for the Spotify side
+  audioplayers: ^5.2.1
+  # HTTP for connecting to your Flask/FastAPI backend
+  http: ^1.2.0
+  # Icons for a professional look
+  font_awesome_flutter: ^10.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
