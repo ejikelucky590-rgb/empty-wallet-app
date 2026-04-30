@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/theme.dart';
 import 'auth_service.dart';
+import '../navigation/main_navigation_shell.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -33,7 +34,12 @@ class _AuthScreenState extends State<AuthScreen> {
       } else {
         await _authService.signUp(_emailController.text.trim(), _passwordController.text.trim());
       }
-      // Navigation logic to Main Shell goes here after Firebase check
+      
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const MainNavigationShell()),
+        );
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 48,
-                    fontWeight: FontWeight.black,
+                    fontWeight: FontWeight.w900,
                     letterSpacing: 10,
                     color: DoveColors.white,
                   ),
@@ -85,7 +91,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   controller: _emailController,
                   style: const TextStyle(color: DoveColors.white),
                   decoration: const InputDecoration(labelText: "EMAIL"),
-                  validator: (v) => v!.contains('@') ? null : "INVALID EMAIL",
+                  validator: (v) => (v != null && v.contains('@')) ? null : "INVALID EMAIL",
                 ),
                 const SizedBox(height: 25),
                 TextFormField(
@@ -93,7 +99,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   style: const TextStyle(color: DoveColors.white),
                   decoration: const InputDecoration(labelText: "PASSWORD"),
                   obscureText: true,
-                  validator: (v) => v!.length < 6 ? "TOO SHORT" : null,
+                  validator: (v) => (v != null && v.length < 6) ? "TOO SHORT" : null,
                 ),
                 const SizedBox(height: 50),
                 ElevatedButton(

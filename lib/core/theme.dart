@@ -7,6 +7,7 @@ class DoveColors {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color grey = Color(0xFF86878B);
+  static const Color darkGrey = Color(0xFF121212);
 }
 
 class DoveTheme {
@@ -19,7 +20,17 @@ class DoveTheme {
       colorScheme: const ColorScheme.dark(
         primary: DoveColors.white,
         secondary: DoveColors.cyan,
-        surface: DoveColors.black,
+        surface: DoveColors.darkGrey,
+        error: DoveColors.red,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        labelStyle: TextStyle(color: DoveColors.grey),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: DoveColors.cyan),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: DoveColors.grey),
+        ),
       ),
     );
   }
