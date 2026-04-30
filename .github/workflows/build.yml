@@ -19,15 +19,20 @@ jobs:
           channel: 'stable'
 
       - name: Repair Android Project
-        run: flutter create --platforms android .
+        run: flutter create --platforms android,web .
+
+      - name: Build Web
+        run: flutter build web --release
 
       - name: Build APK
         run: |
           flutter pub get
           flutter build apk --split-per-abi
           
-      - name: Upload APKs
+      - name: Upload All Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: all-release-apks
-          path: build/app/outputs/flutter-apk/*.apk
+          name: project-builds
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+            build/web/**
