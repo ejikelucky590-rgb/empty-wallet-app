@@ -1,0 +1,10 @@
+{
+    "name": "Dove Music",
+    "short_name": "Dove",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#25F4EE",
+    "description": "Music Discovery for the Streets",
+    "orientation": "portrait-primary"
+}
