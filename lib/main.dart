@@ -5,13 +5,14 @@ import 'features/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // We initialize Firebase but allow it to fail gracefully if 
-  // the config files aren't ready yet
+  
+  // Try to initialize Firebase, but don't let it crash the app if it fails
   try {
     await Firebase.initializeApp();
   } catch (e) {
-    print("Firebase not configured yet: $e");
+    debugPrint("Firebase initialization failed: $e");
   }
+  
   runApp(const DoveMusicApp());
 }
 
@@ -22,6 +23,7 @@ class DoveMusicApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Dove Music',
       theme: DoveTheme.darkTheme,
       home: const SplashScreen(),
     );

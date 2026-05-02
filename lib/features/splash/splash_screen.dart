@@ -13,17 +13,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToNext();
+    _startTimer();
   }
 
-  _navigateToNext() async {
-    await Future.delayed(const Duration(seconds: 3));
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const AuthScreen()),
-      );
-    }
+  void _startTimer() {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const AuthScreen()),
+        );
+      }
+    });
   }
 
   @override
@@ -38,14 +38,15 @@ class _SplashScreenState extends State<SplashScreen> {
               "DOVE",
               style: TextStyle(
                 color: DoveColors.white,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 10,
+                fontSize: 48,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 12,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             const CircularProgressIndicator(
               color: DoveColors.cyan,
+              strokeWidth: 2,
             ),
           ],
         ),
