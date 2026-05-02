@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DoveColors {
   static const Color cyan = Color(0xFF25F4EE);
@@ -13,24 +12,14 @@ class DoveColors {
 class DoveTheme {
   static ThemeData get darkTheme {
     return ThemeData(
-      useMaterial3: true,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: DoveColors.black,
-      textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+      primaryColor: DoveColors.white,
       colorScheme: const ColorScheme.dark(
         primary: DoveColors.white,
         secondary: DoveColors.cyan,
         surface: DoveColors.darkGrey,
         error: DoveColors.red,
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        labelStyle: TextStyle(color: DoveColors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: DoveColors.cyan),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: DoveColors.grey),
-        ),
       ),
     );
   }

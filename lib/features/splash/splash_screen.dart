@@ -13,17 +13,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _startTimer();
+    _navigateToAuth();
   }
 
-  void _startTimer() {
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const AuthScreen()),
-        );
-      }
-    });
+  void _navigateToAuth() async {
+    // Wait for 3 seconds so the user sees your brand
+    await Future.delayed(const Duration(seconds: 3));
+    if (mounted) {
+      Navigator.pushReplacement(
+        context, 
+        MaterialPageRoute(builder: (context) => const AuthScreen())
+      );
+    }
   }
 
   @override
@@ -38,15 +39,20 @@ class _SplashScreenState extends State<SplashScreen> {
               "DOVE",
               style: TextStyle(
                 color: DoveColors.white,
-                fontSize: 48,
+                fontSize: 50,
                 fontWeight: FontWeight.w900,
-                letterSpacing: 12,
+                letterSpacing: 15,
               ),
             ),
-            const SizedBox(height: 30),
-            const CircularProgressIndicator(
-              color: DoveColors.cyan,
-              strokeWidth: 2,
+            const SizedBox(height: 20),
+            // This is a Flutter Widget, not an HTML tag
+            const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                color: DoveColors.cyan,
+                strokeWidth: 2,
+              ),
             ),
           ],
         ),
